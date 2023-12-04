@@ -37,6 +37,9 @@ module.exports = {
       medical_history: {
         type: Sequelize.STRING,
       },
+      DOB: {
+        type: Sequelize.DATEONLY,
+      },
       created_at: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),

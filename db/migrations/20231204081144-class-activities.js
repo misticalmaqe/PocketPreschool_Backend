@@ -63,7 +63,7 @@ module.exports = {
       class_activity_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'class_activties',
+          model: 'class_activities',
           key: 'id',
         },
       },
@@ -87,6 +87,7 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-    await queryInterface.dropTable('class_activities', 'class_act_imgs');
+    await queryInterface.dropTable('class_activities');
+    await queryInterface.dropTable('class_act_imgs');
   },
 };

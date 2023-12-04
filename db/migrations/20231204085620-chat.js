@@ -57,11 +57,11 @@ module.exports = {
       photo_url: {
         type: Sequelize.STRING,
       },
-      isAdmin: {
+      is_admin: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
       },
-      chat_room: {
+      chat_room_id: {
         type: Sequelize.INTEGER,
         references: {
           model: 'chat_rooms',
@@ -78,6 +78,7 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-    await queryInterface.dropTable('chat_rooms', 'chat');
+    await queryInterface.dropTable('chat_rooms');
+    await queryInterface.dropTable('chat');
   },
 };
