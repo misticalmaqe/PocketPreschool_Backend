@@ -25,7 +25,7 @@ class ClassActivitesController extends BaseController {
     try {
       const allNewsLetterIds = newsLetterIds.split(',');
       const allNewsLetterImgs = await this.newsImgs.findAll({
-        where: { newsLetterId: allNewsLetterIds },
+        where: { newsLettersId: allNewsLetterIds },
       });
       return res.json(allNewsLetterImgs);
     } catch (err) {

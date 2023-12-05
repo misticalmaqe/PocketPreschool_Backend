@@ -9,13 +9,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Child.belongsTo(models.user, { foreignKey: 'userId' });
-      Child.hasMany(models.chatRooms, { foreignKey: 'childId' });
+      Child.belongsTo(models.user, { foreignKey: 'usersId' });
+      Child.hasMany(models.chatRooms, { foreignKey: 'childrenId' });
     }
   }
   Child.init(
     {
-      userId: {
+      usersId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
       grade: DataTypes.STRING,
       allergies: DataTypes.STRING,
       medicalHistory: DataTypes.STRING,
-      DOB: DataTypes.DATEONLY,
+      DateOfBirth: DataTypes.DATEONLY,
     },
     {
       sequelize,
