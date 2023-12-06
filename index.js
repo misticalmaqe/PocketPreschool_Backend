@@ -1,43 +1,60 @@
-//-----------Requires-----------//
-const cors = require('cors');
-const express = require('express');
-require('dotenv').config();
+const express = require("express");
+const http = require("http");
+const socketIO = require("socket.io");
+const cors = require("cors");
+require("dotenv").config();
 
-//-----------Importing Controllers-----------//
-const UsersController = require('./controllers/usersController');
-
-//------------Importing Routers--------------//
-const UsersRouter = require('./routers/usersRouter');
-
-//--------------Importing DB----------------//
-const db = require('./db/models/index');
+const UsersController = require("./controllers/usersController");
+const UsersRouter = require("./routers/usersRouter");
+const db = require("./db/models/index");
 const { user } = db;
+const jwtAuth = require("./middlewares/jwtAuth");
 
-//----------Importing Middlewares-----------//
-const jwtAuth = require('./middlewares/jwtAuth');
-
-//---------Initializing Controllers---------//
 const usersController = new UsersController(user);
-
-//-----------Initializing Routers-----------//
 const usersRouter = new UsersRouter(usersController, jwtAuth).routes();
 
-const PORT = process.env.DB_PORT;
+const PORT = process.env.PORT || 8080; // Use PORT as the default if it's not specified
 const app = express();
 
-//-----------Enable CORS access to this server-----------//
-const corsOptions = {
-  origin: 'http://localhost:3000',
-  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-};
+app.use(
+  cors({
+    origin: "http://localhost:8080",
+  })
+);
 
-app.use(cors(corsOptions));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-//-----------Using the Routers-----------//
-app.use('/user', usersRouter);
-
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Express app listening on port ${PORT}!`);
+});
+
+const io = require("socket.io")(server, {
+  cors: {
+    origin: true,
+    methods: ["GET", "PUT", "POST", "DELETE"],
+    credentials: true,
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log(`New connection made, the socket id is: ${socket.id}`);
+
+  socket.on("send-message", (message, chatroomId) => {
+    console.log(
+      `message from frontend/client: ${JSON.stringify(
+        message
+      )} from room ${chatroomId}`
+    );
+
+    socket.to(chatroomId).emit("receive-message", message);
+  });
+
+  socket.on("user-typing", (userId, chatroomId) => {
+    socket.to(chatroomId).emit("user-typing-response", userId);
+  });
+
+  socket.on("attachment-table-updated", (chatroomId) => {
+    console.log("chatroom id: ", chatroomId);
+    if (chatroomId) {
+      socket.to(chatroomId).emit("refresh-attachments");
+    }
+  });
 });
