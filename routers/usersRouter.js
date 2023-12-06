@@ -14,13 +14,17 @@ class UsersRouter {
     //-----------Users Route-----------//
     router.get('/', this.controller.getAll);
     router.get('/:usersId', this.controller.getOne);
+    router.get('/multiple/:multipleEmails', this.controller.getMultipleIds);
     router.post('/', this.controller.add);
     router.put('/:id', this.controller.edit);
     router.delete('/:id', this.controller.delete);
-    router.get('/multiple/:multipleEmails', this.controller.getMultipleIds);
 
     //-----------Change Password Route-----------//
-    router.put('/changePassword/:userid', this.controller.changePassword);
+    router.put('/changePassword', this.controller.updatePassword);
+
+    //-----------Child Route-----------//
+    router.get('/child/:id', this.controller.getAllChildOfParent);
+    router.get('/childg/:grade', this.controller.getChildrenByGrade);
 
     return router;
   };

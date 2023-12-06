@@ -1,30 +1,72 @@
-const express = require("express");
-const http = require("http");
+//-----------Requires-----------//
+const cors = require('cors');
+const express = require('express');
 const socketIO = require("socket.io");
-const cors = require("cors");
-require("dotenv").config();
+require('dotenv').config();
 
-const UsersController = require("./controllers/usersController");
-const UsersRouter = require("./routers/usersRouter");
-const db = require("./db/models/index");
-const { user } = db;
-const jwtAuth = require("./middlewares/jwtAuth");
+//-----------Importing Controllers-----------//
+const UsersController = require('./controllers/usersController');
+const ClassActivitiesController = require('./controllers/classActivityController');
+const NewsLettersController = require('./controllers/newsLetterController');
+const ChatController = require('./controllers/chatController');
 
-const usersController = new UsersController(user);
+//------------Importing Routers--------------//
+const UsersRouter = require('./routers/usersRouter');
+const ClassActivitesRouter = require('./routers/classActivityRouter');
+const NewsLetterRouter = require('./routers/newsLetterRouter');
+const ChatRouter = require('./routers/chatRouter');
+
+//--------------Importing DB----------------//
+const db = require('./db/models/index');
+const {
+  child,
+  chat,
+  chatRooms,
+  classActImgs,
+  classActivity,
+  newsImgs,
+  newsLetter,
+  user,
+} = db;
+
+//----------Importing Middlewares-----------//
+const jwtAuth = require('./middlewares/jwtAuth');
+
+//---------Initializing Controllers---------//
+const usersController = new UsersController(user, child);
+const classActivityController = new ClassActivitiesController(
+  classActivity,
+  classActImgs
+);
+const newsLetterController = new NewsLettersController(newsLetter, newsImgs);
+const chatController = new ChatController(chatRooms, chat, child);
+
+//-----------Initializing Routers-----------//
 const usersRouter = new UsersRouter(usersController, jwtAuth).routes();
+const classActivityRouter = new ClassActivitesRouter(
+  classActivityController
+).routes();
+const newsLetterRouter = new NewsLetterRouter(newsLetterController).routes();
+const chatRouter = new ChatRouter(chatController).routes();
 
 const PORT = process.env.DB_PORT || 8080; // Use PORT as the default if it's not specified
 const app = express();
 
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-  })
-);
+
+//-----------Enable CORS access to this server-----------//
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const server = app.listen(PORT, () => {
   console.log(`Express app listening on port ${PORT}!`);
 });
+
 
 const io = require("socket.io")(server, {
   cors: {
@@ -33,6 +75,13 @@ const io = require("socket.io")(server, {
     credentials: true,
   },
 });
+
+//-----------Using the Routers-----------//
+app.use('/user', usersRouter);
+app.use('/classactivity', classActivityRouter);
+app.use('/newsletter', newsLetterRouter);
+app.use('/chat', chatRouter);
+
 
 io.on("connection", (socket) => {
   console.log(`New connection made, the socket id is: ${socket.id}`);
