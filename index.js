@@ -13,12 +13,12 @@ const jwtAuth = require("./middlewares/jwtAuth");
 const usersController = new UsersController(user);
 const usersRouter = new UsersRouter(usersController, jwtAuth).routes();
 
-const PORT = process.env.PORT || 8080; // Use PORT as the default if it's not specified
+const PORT = process.env.DB_PORT || 8080; // Use PORT as the default if it's not specified
 const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:8080",
+    origin: "http://localhost:3000",
   })
 );
 
