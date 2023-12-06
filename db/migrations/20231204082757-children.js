@@ -16,7 +16,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      user_id: {
+      users_id: {
         type: Sequelize.INTEGER,
         references: {
           model: 'users',
@@ -37,7 +37,7 @@ module.exports = {
       medical_history: {
         type: Sequelize.STRING,
       },
-      DOB: {
+      date_of_birth: {
         type: Sequelize.DATEONLY,
       },
       created_at: {

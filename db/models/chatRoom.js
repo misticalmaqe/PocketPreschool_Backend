@@ -9,14 +9,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      ChatRoom.belongsTo(models.user, { foreignKey: 'userId' });
-      ChatRoom.belongsTo(models.child, { foreignKey: 'childId' });
-      ChatRoom.hasMany(models.chat, { foreignKey: 'chatRoomId' });
+      ChatRoom.belongsTo(models.user, { foreignKey: 'usersId' });
+      ChatRoom.belongsTo(models.child, { foreignKey: 'childrenId' });
+      ChatRoom.hasMany(models.chat, { foreignKey: 'chatRoomsId' });
     }
   }
   ChatRoom.init(
     {
-      userId: {
+      usersId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
           key: 'id',
         },
       },
-      childId: {
+      childrenId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {

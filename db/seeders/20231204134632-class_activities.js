@@ -19,6 +19,7 @@ module.exports = {
         description:
           'From monekys swinging from vine to vine, to the elephants shooting water out from its trunk! This place is zootastic!',
         grade: 'K1',
+        users_id: 1,
       },
       {
         title: 'Deepavali Celebration',
@@ -26,6 +27,7 @@ module.exports = {
         description:
           'Traditional Indian Snacks, putting on henna and dancing to tamil songs!',
         grade: 'K1',
+        users_id: 1,
       },
       {
         title: 'Adelines Birthday Party',
@@ -33,6 +35,7 @@ module.exports = {
         description:
           'The children had so much fun with the game activities, the cake and to end the celebration...PRESENTS!',
         grade: 'K1',
+        users_id: 1,
       },
     ]);
 

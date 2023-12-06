@@ -10,14 +10,14 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       NewsImgs.belongsTo(models.newsLetter, {
-        foreignKey: 'newsLetterId',
+        foreignKey: 'newsLettersId',
       });
     }
   }
   NewsImgs.init(
     {
       url: DataTypes.STRING,
-      newsLetterId: {
+      newsLettersId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {

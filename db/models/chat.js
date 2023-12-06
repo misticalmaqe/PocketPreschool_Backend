@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Chat.belongsTo(models.chatRooms, { foreignKey: 'chatRoomId' });
+      Chat.belongsTo(models.chatRooms, { foreignKey: 'chatRoomsId' });
     }
   }
   Chat.init(
@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       text: DataTypes.STRING,
       photoUrl: DataTypes.STRING,
       isAdmin: DataTypes.BOOLEAN,
-      chatRoomId: {
+      chatRoomsId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {

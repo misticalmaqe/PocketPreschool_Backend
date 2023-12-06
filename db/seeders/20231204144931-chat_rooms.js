@@ -14,87 +14,87 @@ module.exports = {
      */
     await queryInterface.bulkInsert('chat_rooms', [
       {
-        user_id: 1,
-        child_id: 1,
+        users_id: 1,
+        children_id: 1,
       },
       {
-        user_id: 1,
-        child_id: 2,
+        users_id: 1,
+        children_id: 2,
       },
       {
-        user_id: 1,
-        child_id: 3,
+        users_id: 1,
+        children_id: 3,
       },
       {
-        user_id: 1,
-        child_id: 4,
+        users_id: 1,
+        children_id: 4,
       },
       {
-        user_id: 1,
-        child_id: 5,
+        users_id: 1,
+        children_id: 5,
       },
       {
-        user_id: 1,
-        child_id: 6,
+        users_id: 1,
+        children_id: 6,
       },
       {
-        user_id: 1,
-        child_id: 7,
+        users_id: 1,
+        children_id: 7,
       },
       {
-        user_id: 1,
-        child_id: 8,
+        users_id: 1,
+        children_id: 8,
       },
       {
-        user_id: 10,
-        child_id: 9,
+        users_id: 10,
+        children_id: 9,
       },
     ]);
 
-    await queryInterface.bulkInsert('chat', [
+    await queryInterface.bulkInsert('chats', [
       {
         text: 'Hello Baskinroe Daddy!',
-        chat_room_id: 1,
+        chat_rooms_id: 1,
         is_admin: true,
       },
       {
         text: 'Hello Aziza Mummy!',
-        chat_room_id: 2,
+        chat_rooms_id: 2,
         is_admin: true,
       },
       {
         text: 'Hello Chester Mummy!',
-        chat_room_id: 3,
+        chat_rooms_id: 3,
         is_admin: true,
       },
       {
         text: 'Hello Yan Yan Daddy!',
-        chat_room_id: 4,
+        chat_rooms_id: 4,
         is_admin: true,
       },
       {
         text: 'Hello Adeline Daddy!',
-        chat_room_id: 5,
+        chat_rooms_id: 5,
         is_admin: true,
       },
       {
         text: 'Hello Bubbles Mummy!',
-        chat_room_id: 6,
+        chat_rooms_id: 6,
         is_admin: true,
       },
       {
         text: 'Hello Umairah Mummy!',
-        chat_room_id: 7,
+        chat_rooms_id: 7,
         is_admin: true,
       },
       {
         text: 'Hello Benedict Mummy!',
-        chat_room_id: 8,
+        chat_rooms_id: 8,
         is_admin: true,
       },
       {
         text: 'Hello Isabella Mummy!',
-        chat_room_id: 9,
+        chat_rooms_id: 9,
         is_admin: true,
       },
     ]);
@@ -108,6 +108,6 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
     await queryInterface.bulkDelete('chat_rooms');
-    await queryInterface.bulkDelete('chat');
+    await queryInterface.bulkDelete('chats');
   },
 };

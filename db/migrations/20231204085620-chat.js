@@ -16,7 +16,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      user_id: {
+      users_id: {
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
         references: {
@@ -24,7 +24,7 @@ module.exports = {
           key: 'id',
         },
       },
-      child_id: {
+      children_id: {
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
         references: {
@@ -44,7 +44,7 @@ module.exports = {
       },
     });
 
-    await queryInterface.createTable('chat', {
+    await queryInterface.createTable('chats', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -61,12 +61,22 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         allowNull: false,
       },
-      chat_room_id: {
+      chat_rooms_id: {
         type: Sequelize.INTEGER,
         references: {
           model: 'chat_rooms',
           key: 'id',
         },
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        allowNull: false,
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        allowNull: false,
       },
     });
   },
@@ -79,6 +89,6 @@ module.exports = {
      * await queryInterface.dropTable('users');
      */
     await queryInterface.dropTable('chat_rooms');
-    await queryInterface.dropTable('chat');
+    await queryInterface.dropTable('chats');
   },
 };
