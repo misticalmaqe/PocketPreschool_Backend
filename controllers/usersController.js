@@ -9,7 +9,8 @@ dotenv.config();
 
 // Retrieve environment variables
 
-const SECRETKEY = process.env.DB_SECRETKEY;
+const SECRETKEYAUTH = process.env.DB_SECRETKEYAUTH;
+const SECRETKEYREFRESH = process.env.DB_SECRETKEYREFRESH;
 
 // Define UsersController class extending BaseController
 class UsersController extends BaseController {
@@ -95,11 +96,11 @@ class UsersController extends BaseController {
       isAdmin: user.isAdmin,
     };
 
-    const authToken = jwt.sign(payload, SECRETKEY, {
+    const authToken = jwt.sign(payload, SECRETKEYAUTH, {
       expiresIn: '10mins',
     });
 
-    const refreshToken = jwt.sign(payload, SECRETKEY, {
+    const refreshToken = jwt.sign(payload, SECRETKEYREFRESH, {
       expiresIn: '999999hours',
     });
 
@@ -112,10 +113,54 @@ class UsersController extends BaseController {
 
     return res.json({ success: true, authToken, refreshToken });
   };
-
   //JWT generate new AuthToken
-  jwtNewAuthToken = async (req, res) => {
-    const { userId } = req.params;
+  jwtNewAuthTokenValidation = async (req, res) => {
+    const { authTokenLocal, refreshTokenLocal } = req.body;
+    try {
+      //verify auth and refresh token
+      const verifiedAuthToken = jwt.verify(authTokenLocal, SECRETKEYAUTH);
+      req.userId = verifiedAuthToken.id;
+      const verifiedRefreshToken = jwt.verify(
+        refreshTokenLocal,
+        SECRETKEYREFRESH
+      );
+      req.userId = verifiedRefreshToken.id;
+
+      //find session Id where authToken and refreshToken
+      const findSessionTable = await this.model.findOne({
+        where: { jwtAuth: authTokenLocal, refreshAuth: refreshTokenLocal },
+      });
+      if (findSessionTable.isValid === true) {
+        //create new token
+        const user = await this.model.findOne({ where: { id: userId } });
+        const payload = {
+          id: user.id,
+          email: user.email,
+          isAdmin: user.isAdmin,
+        };
+
+        const authToken = jwt.sign(payload, SECRETKEYAUTH, {
+          expiresIn: '10mins',
+        });
+
+        // update session tables with new token with useId
+        const sessionTableToEdit = await this.sessionTable.findByPk({
+          where: { usersId: userId },
+        });
+        // Update the user's properties using Sequelize's update method
+        await sessionTableToEdit.update({ jwtAuth: authToken });
+        return res.json({ success: true, newAuthToken });
+      } else {
+        await this.sessionTable.destroy;
+        return res.json({ msg: 'session deleted' });
+      }
+    } catch (err) {
+      return res.status(404).json({ message: 'validation function failed' });
+    }
+  };
+  //JWT generate new AuthToken
+  jwtNewAuthTokenValidation = async (req, res) => {
+    const { authToken, refreshToken } = req.body;
     try {
       //create new token
       const user = await this.model.findOne({ where: { id: userId } });
@@ -125,7 +170,7 @@ class UsersController extends BaseController {
         isAdmin: user.isAdmin,
       };
 
-      const authToken = jwt.sign(payload, SECRETKEY, {
+      const authToken = jwt.sign(payload, SECRETKEYAUTH, {
         expiresIn: '10mins',
       });
 

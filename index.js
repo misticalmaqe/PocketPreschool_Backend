@@ -45,10 +45,14 @@ const chatController = new ChatController(chatRooms, chat, child);
 //-----------Initializing Routers-----------//
 const usersRouter = new UsersRouter(usersController, jwtAuth).routes();
 const classActivityRouter = new ClassActivitesRouter(
-  classActivityController
+  classActivityController,
+  jwtAuth
 ).routes();
-const newsLetterRouter = new NewsLetterRouter(newsLetterController).routes();
-const chatRouter = new ChatRouter(chatController).routes();
+const newsLetterRouter = new NewsLetterRouter(
+  newsLetterController,
+  jwtAuth
+).routes();
+const chatRouter = new ChatRouter(chatController, jwtAuth).routes();
 
 const PORT = process.env.DB_PORT || 8080; // Use PORT as the default if it's not specified
 const app = express();

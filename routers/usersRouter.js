@@ -10,25 +10,36 @@ class UsersRouter {
     //-----------JWT Route-----------//
     router.post('/jwtsignup', this.controller.jwtSignUp);
     router.post('/jwtsignin', this.controller.jwtSignIn);
-    router.get('/jwtnewauthtoken', this.controller.jwtNewAuthToken);
+    router.put(
+      '/jwtNewAuthTokenValidation',
+      this.controller.jwtNewAuthTokenValidation
+    );
 
     //-----------Users Route-----------//
-    router.get('/', this.controller.getAll);
-    router.get('/:usersId', this.controller.getOne);
-    router.get('/multiple/:multipleEmails', this.controller.getMultipleIds);
-    router.post('/', this.controller.add);
-    router.put('/:id', this.controller.edit);
-    router.delete('/:id', this.controller.delete);
+    router.get('/', this.jwtAuth, this.controller.getAll);
+    router.get('/:usersId', this.jwtAuth, this.controller.getOne);
+    router.get(
+      '/multiple/:multipleEmails',
+      this.jwtAuth,
+      this.controller.getMultipleIds
+    );
+    router.post('/', this.jwtAuth, this.controller.add);
+    router.put('/:id', this.jwtAuth, this.controller.edit);
+    router.delete('/:id', this.jwtAuth, this.controller.delete);
 
     //-----------Change Password Route-----------//
-    router.put('/changePassword', this.controller.updatePassword);
+    router.put('/changePassword', this.jwtAuth, this.controller.updatePassword);
 
     //-----------Child Route-----------//
-    router.get('/child/:id', this.controller.getAllChildOfParent);
-    router.get('/childg/:grade', this.controller.getChildrenByGrade);
+    router.get('/child/:id', this.jwtAuth, this.controller.getAllChildOfParent);
+    router.get(
+      '/childg/:grade',
+      this.jwtAuth,
+      this.controller.getChildrenByGrade
+    );
 
     //-----------Session Route-----------//
-    router.delete('/session/:id', this.controller.deleteByUserId);
+    router.delete('/session/:id', this.jwtAuth, this.controller.deleteByUserId);
 
     return router;
   };
