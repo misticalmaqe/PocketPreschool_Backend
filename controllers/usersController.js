@@ -14,14 +14,16 @@ const SECRETKEY = process.env.DB_SECRETKEY;
 // Define UsersController class extending BaseController
 class UsersController extends BaseController {
   // Constructor to initialize the UsersController with a model and groupAccount
-  constructor(model, child) {
+  constructor(model, child, sessionTable) {
     // Call the constructor of the base class (BaseController)
     super(model);
     this.child = child;
+    this.sessionTable = sessionTable;
   }
 
   //---------------JWT---------------//
   // JWT SIGN UP
+  // does not need auth and refresh token as you can't sign up on your own...
   jwtSignUp = async (req, res) => {
     const { email, password, fullName, phoneNumber, isAdmin, displayPhoto } =
       req.body;
@@ -58,15 +60,7 @@ class UsersController extends BaseController {
         displayPhoto: displayPhoto,
       });
 
-      const payload = {
-        id: newUser.id,
-        email,
-        isAdmin,
-      };
-
-      const token = jwt.sign(payload, SECRETKEY);
-
-      return res.json({ success: true, token, payload, newUser });
+      return res.json({ success: true, newUser });
     } catch (err) {
       console.error(err);
       return res.status(500).json({ error: true, msg: 'Error creating user' });
@@ -97,13 +91,56 @@ class UsersController extends BaseController {
 
     const payload = {
       id: user.id,
-      email,
-      isAdmin,
+      email: user.email,
+      isAdmin: user.isAdmin,
     };
 
-    const token = jwt.sign(payload, SECRETKEY);
+    const authToken = jwt.sign(payload, SECRETKEY, {
+      expiresIn: '10mins',
+    });
 
-    return res.json({ success: true, token, payload });
+    const refreshToken = jwt.sign(payload, SECRETKEY, {
+      expiresIn: '999999hours',
+    });
+
+    await this.sessionTable.create({
+      usersId: user.id,
+      refreshAuth: refreshToken,
+      jwtAuth: authToken,
+      isValid: true,
+    });
+
+    return res.json({ success: true, authToken, refreshToken });
+  };
+
+  //JWT generate new AuthToken
+  jwtNewAuthToken = async (req, res) => {
+    const { userId } = req.params;
+    try {
+      //create new token
+      const user = await this.model.findOne({ where: { id: userId } });
+      const payload = {
+        id: user.id,
+        email: user.email,
+        isAdmin: user.isAdmin,
+      };
+
+      const authToken = jwt.sign(payload, SECRETKEY, {
+        expiresIn: '10mins',
+      });
+
+      // update session tables with new token with useId
+      const sessionTableToEdit = await this.sessionTable.findByPk({
+        where: { usersId: userId },
+      });
+      // Update the user's properties using Sequelize's update method
+      await sessionTableToEdit.update({ jwtAuth: authToken });
+      return res.json({ authToken });
+    } catch (err) {
+      return res
+        .status(404)
+        .json({ message: 'did not manage to generate new token' });
+    }
   };
 
   //---------------USER---------------//
@@ -261,6 +298,21 @@ class UsersController extends BaseController {
       return res.json(allChildren);
     } catch (err) {
       return res.status(400).json({ error: true, msg: 'children not found' });
+    }
+  };
+
+  //---------------SessionTable---------------//
+  deleteByUserId = async (req, res) => {
+    const { id } = req.params;
+    try {
+      // Find the user to delete by ID
+      const sessionToDelete = await this.sessionTable.destroy({
+        where: { usersId: id },
+      });
+
+      return res.json({ msg: 'session deleted' });
+    } catch (err) {
+      return res.status(400).json({ error: true, msg: 'failed to delete' });
     }
   };
 }

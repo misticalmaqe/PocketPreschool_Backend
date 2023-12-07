@@ -10,6 +10,7 @@ class UsersRouter {
     //-----------JWT Route-----------//
     router.post('/jwtsignup', this.controller.jwtSignUp);
     router.post('/jwtsignin', this.controller.jwtSignIn);
+    router.get('/jwtnewauthtoken', this.controller.jwtNewAuthToken);
 
     //-----------Users Route-----------//
     router.get('/', this.controller.getAll);
@@ -25,6 +26,9 @@ class UsersRouter {
     //-----------Child Route-----------//
     router.get('/child/:id', this.controller.getAllChildOfParent);
     router.get('/childg/:grade', this.controller.getChildrenByGrade);
+
+    //-----------Session Route-----------//
+    router.delete('/session/:id', this.controller.deleteByUserId);
 
     return router;
   };
