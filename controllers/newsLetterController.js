@@ -18,8 +18,18 @@ class ClassActivitesController extends BaseController {
     }
   };
 
-  //-----------For Class Act Imgs---------//
-  //search imgs from class activities Id
+  //-----------For News Letter Imgs---------//
+  //get all imgs
+  getAllImgs = async (req, res) => {
+    try {
+      const output = await this.newsImgs.findAll();
+      return res.json(output);
+    } catch (err) {
+      return res.status(400).json({ error: true, msg: err });
+    }
+  };
+
+  //search imgs from news Letter Id
   findImgs = async (req, res) => {
     const { newsLetterIds } = req.params;
     try {
