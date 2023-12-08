@@ -12,6 +12,7 @@ class UsersRouter {
     router.post('/jwtsignin', this.controller.jwtSignIn);
     router.put(
       '/jwtNewAuthTokenValidation',
+      this.jwtAuth,
       this.controller.jwtNewAuthTokenValidation
     );
 

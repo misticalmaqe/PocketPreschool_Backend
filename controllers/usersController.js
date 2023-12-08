@@ -117,6 +117,7 @@ class UsersController extends BaseController {
   jwtNewAuthTokenValidation = async (req, res) => {
     const { authTokenLocal, refreshTokenLocal } = req.body;
     try {
+      //more try catches
       //verify auth and refresh token
       const verifiedAuthToken = jwt.verify(authTokenLocal, SECRETKEYAUTH);
       req.userId = verifiedAuthToken.id;
@@ -125,6 +126,7 @@ class UsersController extends BaseController {
         SECRETKEYREFRESH
       );
       req.userId = verifiedRefreshToken.id;
+      //
 
       //find session Id where authToken and refreshToken
       const findSessionTable = await this.model.findOne({
