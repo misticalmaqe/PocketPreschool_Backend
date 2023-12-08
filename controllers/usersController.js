@@ -97,7 +97,7 @@ class UsersController extends BaseController {
     };
 
     const authToken = jwt.sign(payload, SECRETKEYAUTH, {
-      expiresIn: '10mins',
+      expiresIn: '999999hours',
     });
 
     const refreshToken = jwt.sign(payload, SECRETKEYREFRESH, {
