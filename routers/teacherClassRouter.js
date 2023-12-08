@@ -8,8 +8,8 @@ class TeacherClassRouter {
   }
   routes = () => {
     //-----------Teacher to class routes-----------//
-    router.get('/:id', this.controller.getByGrade);
-    router.post('/', this.controller.assigningTeacherClass);
+    router.get('/:id', this.jwtAuth, this.controller.getByGrade);
+    router.post('/', this.jwtAuth, this.controller.assigningTeacherClass);
 
     return router;
   };
