@@ -9,10 +9,11 @@ class ClassActivitesController extends BaseController {
   //-----------For News Letters---------//
   //create class activity post
   createPost = async (req, res) => {
-    const newsLetter = req.body;
+    const newPost = req.body;
+    console.log(req.body);
     try {
-      const newsLetterId = await this.model.create(newsLetter);
-      res.json(newsLetterId.id);
+      const newsLetterId = await this.model.create(newPost);
+      res.json(newsLetterId);
     } catch (err) {
       return res.status(400).json({ error: 'failed to create post', msg: err });
     }
