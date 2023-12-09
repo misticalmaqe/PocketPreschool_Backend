@@ -10,7 +10,6 @@ class ClassActivitesController extends BaseController {
   //create class activity post
   createPost = async (req, res) => {
     const newPost = req.body;
-    console.log(req.body);
     try {
       const newsLetterId = await this.model.create(newPost);
       res.json(newsLetterId);
@@ -48,12 +47,13 @@ class ClassActivitesController extends BaseController {
   //create class activity imgs post
   createImgs = async (req, res) => {
     const { urls, newsLetterId } = req.body;
+    console.log(req.body);
     try {
       const createdImages = await Promise.all(
         urls.map(async (url) => {
           const newsLetterImg = await this.newsImgs.create({
-            url,
-            newsLetterId,
+            url: url,
+            newsLettersId: newsLetterId,
           });
           return newsLetterImg;
         })
