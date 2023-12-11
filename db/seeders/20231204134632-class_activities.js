@@ -49,7 +49,7 @@ module.exports = {
         class_activity_id: 1,
       },
       {
-        url: 'https://www.thefoodjournal.com.sg/wp-content/uploads/2016/10/deepavali-treats-food.jpg',
+        url: 'https://ch-api.healthhub.sg/api/public/content/73f0d359b9ca4f63af8a355e1dea3f87?v=2ac89a49',
         class_activity_id: 2,
       },
       {

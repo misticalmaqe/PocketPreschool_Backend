@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   ClassActivity.init(
     {
       title: DataTypes.STRING,
-      dateTime: DataTypes.DATE,
+      date: DataTypes.DATE,
       description: DataTypes.STRING,
       grade: DataTypes.STRING,
       usersId: {
