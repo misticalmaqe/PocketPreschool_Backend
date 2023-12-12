@@ -13,7 +13,7 @@ class NewsLetterRouter {
     //-----------News Letter Imgs-----------//
     router.get('/imgs', this.jwtAuth, this.controller.getAllImgs);
     router.get('/imgs/:newsLetterIds', this.jwtAuth, this.controller.findImgs);
-    router.post('/imgs', this.controller.createImgs);
+    router.post('/imgs', this.jwtAuth, this.controller.createImgs);
     return router;
   };
 }

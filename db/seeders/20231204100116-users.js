@@ -39,7 +39,7 @@ module.exports = {
         phone_number: 88888888,
         is_admin: false,
         display_photo:
-          'https://firebasestorage.googleapis.com/v0/b/pocket-preschool.appspot.com/o/parentdp%2Fparent.png?alt=media&token=070f5f75-ed30-47ad-a45e-2e77b3c58113',
+          'https://firebasestorage.googleapis.com/v0/b/pocket-preschool.appspot.com/o/parentdp%2Fparent.jpg?alt=media&token=cf27fddc-ce36-4f14-870e-5b05a397f437',
       },
       {
         email: 'parent2@pocket.com',
@@ -49,7 +49,7 @@ module.exports = {
         phone_number: 88888880,
         is_admin: false,
         display_photo:
-          'https://firebasestorage.googleapis.com/v0/b/pocket-preschool.appspot.com/o/parentdp%2Fparent.png?alt=media&token=070f5f75-ed30-47ad-a45e-2e77b3c58113',
+          'https://firebasestorage.googleapis.com/v0/b/pocket-preschool.appspot.com/o/parentdp%2Fparent.jpg?alt=media&token=cf27fddc-ce36-4f14-870e-5b05a397f437',
       },
       {
         email: 'parent3@pocket.com',
@@ -59,7 +59,7 @@ module.exports = {
         phone_number: 88888881,
         is_admin: false,
         display_photo:
-          'https://firebasestorage.googleapis.com/v0/b/pocket-preschool.appspot.com/o/parentdp%2Fparent.png?alt=media&token=070f5f75-ed30-47ad-a45e-2e77b3c58113',
+          'https://firebasestorage.googleapis.com/v0/b/pocket-preschool.appspot.com/o/parentdp%2Fparent.jpg?alt=media&token=cf27fddc-ce36-4f14-870e-5b05a397f437',
       },
       {
         email: 'parent4@pocket.com',
@@ -69,7 +69,7 @@ module.exports = {
         phone_number: 88888882,
         is_admin: false,
         display_photo:
-          'https://firebasestorage.googleapis.com/v0/b/pocket-preschool.appspot.com/o/parentdp%2Fparent.png?alt=media&token=070f5f75-ed30-47ad-a45e-2e77b3c58113',
+          'https://firebasestorage.googleapis.com/v0/b/pocket-preschool.appspot.com/o/parentdp%2Fparent.jpg?alt=media&token=cf27fddc-ce36-4f14-870e-5b05a397f437',
       },
       {
         email: 'parent5@pocket.com',
@@ -79,7 +79,7 @@ module.exports = {
         phone_number: 88888883,
         is_admin: false,
         display_photo:
-          'https://firebasestorage.googleapis.com/v0/b/pocket-preschool.appspot.com/o/parentdp%2Fparent.png?alt=media&token=070f5f75-ed30-47ad-a45e-2e77b3c58113',
+          'https://firebasestorage.googleapis.com/v0/b/pocket-preschool.appspot.com/o/parentdp%2Fparent.jpg?alt=media&token=cf27fddc-ce36-4f14-870e-5b05a397f437',
       },
       {
         email: 'parent6@pocket.com',
@@ -89,7 +89,7 @@ module.exports = {
         phone_number: 88888884,
         is_admin: false,
         display_photo:
-          'https://firebasestorage.googleapis.com/v0/b/pocket-preschool.appspot.com/o/parentdp%2Fparent.png?alt=media&token=070f5f75-ed30-47ad-a45e-2e77b3c58113',
+          'https://firebasestorage.googleapis.com/v0/b/pocket-preschool.appspot.com/o/parentdp%2Fparent.jpg?alt=media&token=cf27fddc-ce36-4f14-870e-5b05a397f437',
       },
       {
         email: 'parent7@pocket.com',
@@ -99,7 +99,7 @@ module.exports = {
         phone_number: 88888885,
         is_admin: false,
         display_photo:
-          'https://firebasestorage.googleapis.com/v0/b/pocket-preschool.appspot.com/o/parentdp%2Fparent.png?alt=media&token=070f5f75-ed30-47ad-a45e-2e77b3c58113',
+          'https://firebasestorage.googleapis.com/v0/b/pocket-preschool.appspot.com/o/parentdp%2Fparent.jpg?alt=media&token=cf27fddc-ce36-4f14-870e-5b05a397f437',
       },
       {
         email: 'parent8@pocket.com',
@@ -109,7 +109,7 @@ module.exports = {
         phone_number: 88888886,
         is_admin: false,
         display_photo:
-          'https://firebasestorage.googleapis.com/v0/b/pocket-preschool.appspot.com/o/parentdp%2Fparent.png?alt=media&token=070f5f75-ed30-47ad-a45e-2e77b3c58113',
+          'https://firebasestorage.googleapis.com/v0/b/pocket-preschool.appspot.com/o/parentdp%2Fparent.jpg?alt=media&token=cf27fddc-ce36-4f14-870e-5b05a397f437',
       },
       {
         email: 'teacher2@pocket.com',

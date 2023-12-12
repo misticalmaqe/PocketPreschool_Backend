@@ -198,7 +198,13 @@ class UsersController extends BaseController {
       // Find a user by ID using Sequelize's findByPk method
       const user = await this.model.findByPk(usersId);
       // Respond with JSON containing the found user
-      return res.json({ user });
+      return res.json({
+        id: user.id,
+        email: user.email,
+        fullName: user.fullName,
+        phoneNumber: user.phoneNumber,
+        displayPhoto: user.displayPhoto,
+      });
     } catch (err) {
       // Handle errors and respond with an error JSON
       return res.status(400).json({ error: true, msg: err });
@@ -289,9 +295,14 @@ class UsersController extends BaseController {
   // Method to update a user's password
   updatePassword = async (req, res) => {
     const { userId, currentPassword, newPassword } = req.body;
+    console.log(userId);
+    console.log(currentPassword);
+    console.log(newPassword);
     try {
       // Find the user by ID
       const userToUpdate = await this.model.findByPk(userId);
+
+      const saltRounds = parseInt(process.env.DB_SALT);
 
       // Verify the current password
       const compare = await bcrypt.compare(
@@ -306,7 +317,6 @@ class UsersController extends BaseController {
       }
 
       // Hash the new password
-      const saltRounds = parseInt(process.env.DB_SALT);
       const hashedNewPassword = await bcrypt.hash(newPassword, saltRounds);
 
       // Update the user's password in the database
