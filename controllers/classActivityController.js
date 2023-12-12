@@ -11,8 +11,8 @@ class ClassActivityController extends BaseController {
   createPost = async (req, res) => {
     const classActivity = req.body;
     try {
-      const classActivityId = await this.model.create(classActivity);
-      res.json(classActivityId.id);
+      const newClassActivity = await this.model.create(classActivity);
+      res.json(newClassActivity);
     } catch (err) {
       return res.status(400).json({ error: 'failed to create post', msg: err });
     }
@@ -53,11 +53,12 @@ class ClassActivityController extends BaseController {
   //create class activity imgs post
   createImgs = async (req, res) => {
     const { urls, classActivityId } = req.body;
+    console.log(req.body);
     try {
       const createdImages = await Promise.all(
         urls.map(async (url) => {
           const classActImg = await this.classActImgs.create({
-            url,
+            url: url,
             classActivityId,
           });
           return classActImg;

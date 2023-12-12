@@ -20,7 +20,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      date_time: {
+      date: {
         type: Sequelize.DATE,
       },
       description: {

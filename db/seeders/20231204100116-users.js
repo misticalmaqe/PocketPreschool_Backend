@@ -28,7 +28,8 @@ module.exports = {
         full_name: 'Josephine Teo',
         phone_number: 88889999,
         is_admin: true,
-        display_photo: null,
+        display_photo:
+          'https://firebasestorage.googleapis.com/v0/b/pocket-preschool.appspot.com/o/teacherdp%2Fteacher.png?alt=media&token=699f5ab9-fb3d-4746-b0c9-8026253e5e5b',
       },
       {
         email: 'parent1@pocket.com',
@@ -109,7 +110,8 @@ module.exports = {
         full_name: 'Lee Hong Mei',
         phone_number: 99998888,
         is_admin: true,
-        display_photo: null,
+        display_photo:
+          'https://firebasestorage.googleapis.com/v0/b/pocket-preschool.appspot.com/o/teacherdp%2Fteacher.png?alt=media&token=699f5ab9-fb3d-4746-b0c9-8026253e5e5b',
       },
     ]);
   },

@@ -28,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       allergies: DataTypes.STRING,
       medicalHistory: DataTypes.STRING,
       DateOfBirth: DataTypes.DATEONLY,
+      displayPhoto: DataTypes.STRING,
     },
     {
       sequelize,

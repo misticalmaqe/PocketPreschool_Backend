@@ -15,7 +15,7 @@ module.exports = {
     await queryInterface.bulkInsert('class_activities', [
       {
         title: 'Zoo Outing!',
-        date_time: '2023-10-20 09:00:00+08',
+        date: '2023-10-20',
         description:
           'From monekys swinging from vine to vine, to the elephants shooting water out from its trunk! This place is zootastic!',
         grade: 'K1',
@@ -23,7 +23,7 @@ module.exports = {
       },
       {
         title: 'Deepavali Celebration',
-        date_time: '2023-11-10 10:00:00+08',
+        date: '2023-11-10',
         description:
           'Traditional Indian Snacks, putting on henna and dancing to tamil songs!',
         grade: 'K1',
@@ -31,7 +31,7 @@ module.exports = {
       },
       {
         title: 'Adelines Birthday Party',
-        date_time: '2023-11-20 12:00:00+08',
+        date: '2023-11-20',
         description:
           'The children had so much fun with the game activities, the cake and to end the celebration...PRESENTS!',
         grade: 'K1',
@@ -49,7 +49,7 @@ module.exports = {
         class_activity_id: 1,
       },
       {
-        url: 'https://www.thefoodjournal.com.sg/wp-content/uploads/2016/10/deepavali-treats-food.jpg',
+        url: 'https://ch-api.healthhub.sg/api/public/content/73f0d359b9ca4f63af8a355e1dea3f87?v=2ac89a49',
         class_activity_id: 2,
       },
       {

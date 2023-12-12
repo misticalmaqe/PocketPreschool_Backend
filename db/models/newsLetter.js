@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   NewsLetter.init(
     {
       title: DataTypes.STRING,
-      dateTime: DataTypes.DATE,
+      date: DataTypes.DATE,
       description: DataTypes.STRING,
       usersId: {
         type: DataTypes.INTEGER,

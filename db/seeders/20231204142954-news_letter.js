@@ -15,7 +15,7 @@ module.exports = {
     await queryInterface.bulkInsert('news_letters', [
       {
         title: "N2's Museum Walkabout",
-        date_time: '2023-09-4 09:00:00+08',
+        date: '2023-09-04',
         description:
           'With the latest exhibition at Singapores National Museume. The children will get to view the state of the art virtual mapping room',
         users_id: 10,

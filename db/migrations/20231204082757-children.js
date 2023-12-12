@@ -40,6 +40,9 @@ module.exports = {
       date_of_birth: {
         type: Sequelize.DATEONLY,
       },
+      display_photo: {
+        type: Sequelize.STRING,
+      },
       created_at: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
