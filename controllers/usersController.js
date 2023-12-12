@@ -295,14 +295,9 @@ class UsersController extends BaseController {
   // Method to update a user's password
   updatePassword = async (req, res) => {
     const { userId, currentPassword, newPassword } = req.body;
-    console.log(userId);
-    console.log(currentPassword);
-    console.log(newPassword);
     try {
       // Find the user by ID
       const userToUpdate = await this.model.findByPk(userId);
-
-      const saltRounds = parseInt(process.env.DB_SALT);
 
       // Verify the current password
       const compare = await bcrypt.compare(
@@ -317,6 +312,7 @@ class UsersController extends BaseController {
       }
 
       // Hash the new password
+      const saltRounds = parseInt(process.env.DB_SALT);
       const hashedNewPassword = await bcrypt.hash(newPassword, saltRounds);
 
       // Update the user's password in the database
