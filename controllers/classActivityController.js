@@ -22,7 +22,9 @@ class ClassActivityController extends BaseController {
   getByGrade = async (req, res) => {
     const { grade } = req.params;
     try {
+      console.log(grade);
       const gradeArray = grade.split(',');
+      console.log(gradeArray);
       const classActivities = await this.model.findAll({
         where: { grade: gradeArray },
       });

@@ -29,7 +29,11 @@ class UsersRouter {
     router.delete('/:id', this.jwtAuth, this.controller.delete);
 
     //-----------Change Password Route-----------//
-    router.put('/changePassword', this.jwtAuth, this.controller.updatePassword);
+    router.put(
+      '/change/changePassword',
+      this.jwtAuth,
+      this.controller.updatePassword
+    );
 
     //-----------Child Route-----------//
     router.get('/child/:id', this.jwtAuth, this.controller.getAllChildOfParent);

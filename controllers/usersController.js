@@ -198,7 +198,13 @@ class UsersController extends BaseController {
       // Find a user by ID using Sequelize's findByPk method
       const user = await this.model.findByPk(usersId);
       // Respond with JSON containing the found user
-      return res.json({ user });
+      return res.json({
+        id: user.id,
+        email: user.email,
+        fullName: user.fullName,
+        phoneNumber: user.phoneNumber,
+        displayPhoto: user.displayPhoto,
+      });
     } catch (err) {
       // Handle errors and respond with an error JSON
       return res.status(400).json({ error: true, msg: err });
