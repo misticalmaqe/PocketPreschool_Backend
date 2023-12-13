@@ -96,25 +96,16 @@ const io = require('socket.io')(server, {
 
 io.on('connection', (socket) => {
   console.log(`New connection made, the socket id is: ${socket.id}`);
-
   socket.on('send-message', (message, chatroomId) => {
     console.log(
       `message from frontend/client: ${JSON.stringify(
         message
       )} from room ${chatroomId}`
     );
-
     socket.to(chatroomId).emit('receive-message', message);
   });
-
-  socket.on('user-typing', (userId, chatroomId) => {
-    socket.to(chatroomId).emit('user-typing-response', userId);
-  });
-
-  socket.on('attachment-table-updated', (chatroomId) => {
-    console.log('chatroom id: ', chatroomId);
-    if (chatroomId) {
-      socket.to(chatroomId).emit('refresh-attachments');
-    }
+  socket.on('join-room', (chatroomId) => {
+    console.log(chatroomId);
+    socket.join(chatroomId);
   });
 });
